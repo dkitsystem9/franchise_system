@@ -1,0 +1,12 @@
+<h2>Select Franchise to Fill Phase 1 Details</h2>
+
+<form method="get" action="{% url 'franchise_phase1' %}">
+    <label for="franchise_id">Franchise:</label>
+    <select id="franchise_id" name="franchise_id" required>
+        <option value="">-- Select Franchise --</option>
+        {% for f in franchises %}
+            <option value="{{ f.id }}">{{ f.franchise_name }}</option>  <!-- Replace 'franchise_name' with actual field -->
+        {% endfor %}
+    </select>
+    <button type="submit">Go</button>
+</form>

@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Franchise List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .table-container {
+      margin: 40px auto;
+      max-width: 1200px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #343a40;
+    }
+
+    .table thead {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f1f3f5;
+      transition: 0.3s;
+    }
+
+    .status {
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .status.Pending {
+      background-color: #ffc107;
+      color: #212529;
+    }
+
+    .status.Approved {
+      background-color: #198754;
+      color: white;
+    }
+
+    .status.Rejected {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="btn btn-outline-primary" href="{% url 'user_dashboard' %}">⬅ Back</a>
+    <span class="navbar-brand mb-0 h5">Franchise Application</span>
+  </div>
+</nav>
+
+<div class="table-container">
+  <h2>Franchise List</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Franchise ID</th>
+          <th>Application No</th>
+          <th>Applicant Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in franchises %}
+        <tr>
+          <td>{{ f.franchise_id }}</td>
+          <td>{{ f.application.application_number }}</td>
+          <td>{{ f.application.applicant_name }}</td>
+          <td>{{ f.application.email }}</td>
+          <td>{{ f.application.phone }}</td>
+          <td>{{ f.application.location }}</td>
+          <td>
+            <span class="status {{ f.application.status }}">{{ f.application.status }}</span>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center">No franchises found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
