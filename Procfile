@@ -1,1 +1,1 @@
-web: gunicorn franchise_system.wsgi:application
+gunicorn franchise_system.wsgi:application
